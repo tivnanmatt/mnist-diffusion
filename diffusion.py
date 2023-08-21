@@ -725,17 +725,4 @@ class FourierDiffusionModel(DiffusionModel):
             return torch.randn((batch_size, 1))
         else:
             return self.sample_x_T_func(batch_size=batch_size, y=y)
-# list of classes in this file:
-__all__ = ['SymmetricMatrix',
-            'ScalarMatrix',
-            'DiagonalMatrix',
-            'FourierMatrix',
-            'DiffusionModel',
-            'UnconditionalScoreEstimator',
-            'ConditionalScoreEstimator',
-            'ScalarDiffusionModel',
-            'ScalarDiffusionModel_VariancePreserving',
-            'ScalarDiffusionModel_VariancePreserving_LinearSchedule',
-            'DiagonalDiffusionModel',
-            'FourierDiffusionModel',
-            ]
+
