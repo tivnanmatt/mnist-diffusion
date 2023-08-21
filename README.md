@@ -43,7 +43,7 @@ After installing the dependencies, clone this repository using `git clone https:
 
 ## MNIST Utilities
 
-`mnist.py` contains utilities for loading the MNIST dataset and plotting images. It also contains a class `MNISTScoreEstimator` that is a child class of `ScoreEstimator` that represents a score estimator for the MNIST dataset. It is initialized with a neural network that takes in an image and returns the score function or the gradient of the log-prior. It implements a method to compute the log-likelihood of an image under the model.
+`mnist_utils.py` contains utilities for data loaders, score estimators, time encoders, position encoders, and bayesian classifiers specific to the MNIST dataset.
 
 ## Examples
 

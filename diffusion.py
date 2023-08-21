@@ -678,9 +678,6 @@ class DiagonalDiffusionModel(DiffusionModel):
         else:
             return self.sample_x_T_func(batch_size=batch_size, y=y)
 
-
-
-
 class FourierDiffusionModel(DiffusionModel):
     def __init__(self,  
                  modulation_transfer_function_func,
