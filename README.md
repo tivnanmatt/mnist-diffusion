@@ -1,4 +1,4 @@
-# MNIST Diffusion Examples
+# MNIST Examples of Scalar, Diagonal, and Fourier Diffusion Models
 
 This repository contains examples of training diffusion models on the MNIST Dataset.
 
