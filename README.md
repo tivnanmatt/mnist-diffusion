@@ -48,6 +48,9 @@ After installing the dependencies, clone this repository using `git clone https:
 ## Examples
 
 `example_diffusion_scalar.py` contains an example of training a scalar diffusion model on the MNIST dataset. It uses a linear schedule for $\bar{\alpha}(t)$.
+
 `example_diffusion_diagonal.py` contains an example of training a diagonal diffusion model on the MNIST dataset. It uses pixel-dependent diffusion schedules for an in-painting task.
+
 `example_diffusion_fourier.py` contains an example of training a Fourier diffusion model on the MNIST dataset. It uses spatial-frequency-dependent diffusion schedules for an image restoration task.
+
 `example_diffusion_classifier_guided.py` contains an example of training a Bayesian classifier on the MNIST dataset, and then using the classifier to guide the diffusion model. It uses a linear schedule for $\bar{\alpha}(t)$.
