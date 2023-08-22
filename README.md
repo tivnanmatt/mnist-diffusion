@@ -17,9 +17,9 @@ $$
 p(x_t | x_0) = \mathcal{N}(x_t ; H(t) x_0, \Sigma(t))
 $$
 
-where $x_0$ is the ground truth image and $x_t$ is the degraded image at time $t$. The signal transfer matrix $H(t)$ is a linear operator that returns the forward process mean when applied to the ground truth image. The matrix $\Sigma(t)$ is a symmetric positive-semidefinite matrix that defines the noise covariance in the forward process. 
+where $x_0$ is the ground truth image and $x_t$ is the degraded image at time $t$. The signal transfer matrix $H(t)$ is a linear operator that returns the forward process mean when applied to the ground truth image, and $\Sigma(t)$ is a symmetric positive-semidefinite covariance matrix which defines the noise magnitude/correlations in the forward process.
 
-In this work, we consider $H(t)$ and $\Sigma(t)$ as sacalar matrices (scalar value times identity), diagonal matrices (element-wise multiplication by a vector), and Fourier matrices (circulant matrices diagonalized by the discrete Fourier transform). 
+In this work, we consider $H(t)$ and $\Sigma(t)$ as scalar matrices (scalar value times identity), diagonal matrices (element-wise multiplication by a vector), and Fourier matrices (circulant matrices diagonalized by the discrete Fourier transform). 
 
 We can show that this forward process is defined by the following stochastic differential equation:
 
