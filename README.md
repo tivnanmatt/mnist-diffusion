@@ -4,7 +4,55 @@ This repository contains examples of training diffusion models on the MNIST Data
 
 The purpose of this repository is to provide a simple, easy-to-understand example of how to train diffusion models using a small dataset. It should be possible to train these models on a high-quality CPU without the need for a GPU. The code is heavily commented and should be easy to follow along.
 
-In addition to standard score-based diffusion models, this work introduces a new method to control the drift and noise schedules with matrix operators $H(t)$, the signal transfer matrix which returns forward process mean when applied to the ground truth image and $\Sigma(t)$, the noise covariance matrix. This method is described in the paper [Fourier Diffusion Models: A Method to Control MTF and NPS in Score-Based Stochastic Image Generation](https://arxiv.org/abs/2303.13285).
+In addition to standard score-based diffusion models, this work introduces a new method to control the drift and noise schedules with matrix operators $H(t)$, the signal transfer matrix which returns forward process mean when applied to the ground truth image and $\Sigma(t)$, the noise covariance matrix. 
+
+
+## Theoretical Methods
+
+The full description of this method is described in [Fourier Diffusion Models: A Method to Control MTF and NPS in Score-Based Stochastic Image Generation](https://arxiv.org/abs/2303.13285).
+
+We consider a forward stochastic process defined by:
+
+$$
+p(x_t | x_0) = \mathcal{N}(x_t ; H(t) x_0, \Sigma(t))
+$$
+
+where $x_0$ is the ground truth image and $x_t$ is the degraded image at time $t$. The signal transfer matrix $H(t)$ is a linear operator that returns the forward process mean when applied to the ground truth image. The matrix $\Sigma(t)$ is a symmetric positive-semidefinite matrix that defines the noise covariance in the forward process. 
+
+In this work, we consider $H(t)$ and $\Sigma(t)$ as sacalar matrices (scalar value times identity), diagonal matrices (element-wise multiplication by a vector), and Fourier matrices (circulant matrices diagonalized by the discrete Fourier transform). 
+
+We can show that this forward process is defined by the following stochastic differential equation:
+
+$$
+dx_t = H'(t) H^{-1}(t) dt + (\Sigma'(t) - 2 H'(t) H^{-1}(t)\Sigma(t))^{\frac{1}{2}} dw_t
+$$
+
+where $w_t$ is a standard Brownian motion. The time-reversed process is given by the following stochastic differential equation:
+
+$$
+dx_t = [-H'(t) H^{-1}(t)  - (\Sigma'(t) + 2 H'(t) H^{-1}(t)\Sigma(t)) \nabla \log{p(x_t)}] dt + (\Sigma'(t) + 2 H'(t) H^{-1}(t)\Sigma(t))^{1/2} dw_t
+$$
+
+where $\nabla \log{p(x_t)}$ is the score function or the gradient of the log-prior evaluated at $x_t$. For deep learning applications, this score is estimated using a neural network.
+
+
+For the special case of scalar diffusion models, we show this general formula reduces to the method presented in [Score-Based Generative Modeling through Stochastic Differential Equations](https://arxiv.org/abs/2011.13456). We can use the following parameterization for scalar diffusion models without loss of generality:
+
+$$
+H(t) = e^{-\frac{1}{2}\int_0^t \beta(s) ds} I
+$$
+
+$$
+\Sigma(t) = \sigma^2(t) I
+$$
+
+resulting in the following stochastic differential equation:
+
+$$
+dx_t = -\frac{1}{2}\beta(t) x_t dt + \sqrt{\beta(t)\sigma^2(t) - \frac{d}{dt}\sigma^2(t)} dw_t
+$$
+
+which corresponds to the variance-preserving (VP) or variance-exploding (VE) diffusion models proposed in the aforementioned score-based SDE paper 
 
 ## Installation
 
